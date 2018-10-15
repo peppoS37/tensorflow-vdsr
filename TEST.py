@@ -59,6 +59,8 @@ def test_VDSR_with_sess(epoch, ckpt_path, data_path,sess):
 			gt_y = gt_list[0]
 			start_t = time.time()
 			img_vdsr_y = sess.run([output_tensor], feed_dict={input_tensor: np.resize(input_y, (1, input_y.shape[0], input_y.shape[1], 1))})
+			tf.train.write_graph(sess.graph_def, './', 'tfVDSR.pbtxt', as_text=False)  
+        		saver.save(sess, './tfDRRN.ckpt')
 			img_vdsr_y = np.resize(img_vdsr_y, (input_y.shape[0], input_y.shape[1]))
 			end_t = time.time()
 			print "end_t",end_t,"start_t",start_t
